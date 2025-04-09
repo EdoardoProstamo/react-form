@@ -3,32 +3,39 @@ import liquors from "./data/liquors";
 
 function App() {
 
-  const [alcolType, setAlcolType] = useState(liquors[0]);
+  const [alcolType, setAlcolType] = useState(['vodka', 'gin', 'rum', 'triple sec', 'tequila']);
   const [newAlcolType, setNewAlcolType] = useState('');
 
 
   const updatePost = e => setNewAlcolType(e.target.value);
 
+
   const showSubmitt = e => {
 
     e.preventDefault();
 
-    //  const alcol = [...alcolType]; => spread operator
-    const alcol = [];
-    alcolType.forEach(alcolType => alcol.push(alcolType));
-    setAlcolType(alcol);
-
-
+    setAlcolType([...alcolType, newAlcolType]);
+    setNewAlcolType('');
   };
 
+
+  const deleteAlcolType = (indexToDelete) => {
+    console.log(indexToDelete);
+
+    const newArray = alcolType.filter((alcol, index) => indexToDelete !== index)
+    setAlcolType(newArray);
+  };
   return (
     <>
       <ul>
-        {liquors.map(liquore => <li key={liquore.id}>{liquore.title}</li>)}
+        {alcolType.map((alcol, index) => <li key={index}>
+          <article>{alcol}</article>
+          <button onClick={() => deleteAlcolType(index)}>Elimina l'elemento</button>
+        </li>)}
       </ul>
 
       <form onSubmit={showSubmitt}>
-        <input type="text" placeholder="Inserisci il nuovo alcolico" onChange={updatePost} />
+        <input type="text" value={newAlcolType} placeholder="Inserisci il nuovo alcolico" onChange={updatePost} />
         <button>INVIO</button>
       </form>
     </>
