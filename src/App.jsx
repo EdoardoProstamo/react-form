@@ -4,8 +4,12 @@ import liquors from "./data/liquors";
 function App() {
 
   const [alcolType, setAlcolType] = useState(null);
+  const [newAlcolType, setNewAlcolType] = useState('');
+
+
   const updatePost = e => setAlcolType(e.target.value);
   const showSubmitt = e => { e.preventDefault() };
+
   return (
     <>
       <form onSubmit={showSubmitt}>
