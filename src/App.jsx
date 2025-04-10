@@ -3,7 +3,7 @@ import liquors from "./data/liquors";
 
 function App() {
 
-  const [alcolType, setAlcolType] = useState(['vodka', 'gin', 'rum', 'triple sec', 'tequila']);
+  const [alcolType, setAlcolType] = useState([]);
   const [newAlcolType, setNewAlcolType] = useState('');
 
 
@@ -20,7 +20,6 @@ function App() {
 
 
   const deleteAlcolType = (indexToDelete) => {
-    console.log(indexToDelete);
 
     const newArray = alcolType.filter((alcol, index) => indexToDelete !== index)
     setAlcolType(newArray);
@@ -28,8 +27,8 @@ function App() {
   return (
     <>
       <ul>
-        {alcolType.map((alcol, index) => <li key={index}>
-          <article>{alcol}</article>
+        {liquors.map(alcol => <li key={alcol.id}>
+          <article>{alcol.title}</article>
           <button onClick={() => deleteAlcolType(index)}>Elimina l'elemento</button>
         </li>)}
       </ul>
